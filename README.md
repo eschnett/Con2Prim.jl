@@ -9,7 +9,7 @@ Convert from conserved to primitive variables in relativistic
 hydrodynamics. See Daniel M. Siegel, Philipp Mösta, Dhruv Desai,
 Samantha Wu, *Recovery schemes for primitive variables in
 general-relativistic magnetohydrodynamics*, The Astrophysical Journal
-859:71 (2018)
+859:71 (2018),
 [DOI:10.3847/1538-4357/aabcc5](https://doi.org/10.3847/1538-4357/aabcc5),
 [arXiv:1712.07538 [astro-ph.HE]](https://arxiv.org/abs/1712.07538) for
 context.
