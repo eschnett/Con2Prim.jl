@@ -1,22 +1,38 @@
 using Con2Prim
 using ForwardDiff
+using Random
 using StaticArrays
 using Test
 
+Random.seed!(0xb99747d6)
 @testset "solve1d" begin
     f(x) = x^2 - 1
-    xlo = 0.0
-    xhi = 1.3
     xsol = 1.0
-    @test solve1d(f, xlo, xhi).x ≈ xsol atol = 1.0e-13
+    for iter in 1:10
+        xlo = rand(0.1:0.01:0.5)
+        xhi = rand(1.5:0.01:2.5)
+        @test solve1d(f, xlo, xhi).x ≈ xsol atol = 1.0e-13
+    end
 end
 
+Random.seed!(0xadf8f6d0)
 @testset "solve2d" begin
-    f(x) = SVector(x[1]^2 - 1, x[2]^2 - 1)
-    xlo = SVector(0.0, 0.7)
-    xhi = SVector(1.3, 2.0)
+    f(x) = SVector(9 / 10 * x[1]^2 + 1 / 10 * x[2]^2 - 1, 1 / 10 * x[1]^2 + 9 / 10 * x[2]^2 - 1)
     xsol = SVector(1.0, 1.0)
-    @test solve2d(f, xlo, xhi).x ≈ xsol atol = 1.0e-13
+    for iter in 1:10
+        xlo = SVector(rand(0.1:0.01:0.5), rand(0.1:0.01:0.5))
+        xhi = SVector(rand(1.5:0.01:2.5), rand(1.5:0.01:2.5))
+        @test solve2d(f, xlo, xhi).x ≈ xsol atol = 1.0e-13
+    end
+end
+
+Random.seed!(0x4809c1fe)
+@testset "solve3d" begin
+    f(x) = SVector(x[1]^2 - 1, x[2]^2 - 1, x[3]^2 - 1)
+    xlo = SVector(0.0, 0.7, 0.3)
+    xhi = SVector(1.3, 2.0, 1.6)
+    xsol = SVector(1.0, 1.0, 1.0)
+    @test solve3d(f, xlo, xhi).x ≈ xsol atol = 1.0e-13
 end
 
 @testset "con2prim" begin
